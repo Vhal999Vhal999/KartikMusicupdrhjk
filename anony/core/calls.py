@@ -86,7 +86,8 @@ class TgCall(PyTgCalls):
 
         ffmpeg_params = (
             (f"-ss {seek_time} " if seek_time > 1 else "")
-            + (f"-af {media.filter}" if media.filter else "")
+            + (f"-af \"{media.filter}\" " if media.filter else "")
+            + ("-vn" if not media.video else "")
         ).strip()
 
         stream = types.MediaStream(
@@ -165,7 +166,7 @@ class TgCall(PyTgCalls):
             await self.stop(chat_id)
             await message.edit_text(_lang["error_rtmp"])
         finally:
-            await asyncio.sleep(3)
+            await asyncio.sleep(5)
             self.restarting[chat_id] -= 1
 
 
