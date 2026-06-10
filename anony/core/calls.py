@@ -3,6 +3,7 @@
 # This file is part of AnonXMusic
 
 
+import time
 from ntgcalls import (ConnectionNotFound, TelegramServerError,
                       RTMPStreamingUnsupported, ConnectionError)
 from pyrogram.errors import (ChatSendMediaForbidden, ChatSendPhotosForbidden,
@@ -90,6 +91,7 @@ class TgCall(PyTgCalls):
                 stream=stream,
                 config=types.GroupCallConfig(auto_start=False),
             )
+            media.played_at = time.time()
             if not seek_time:
                 media.time = 1
                 await db.add_call(chat_id)
