@@ -291,7 +291,9 @@ class TgCall(PyTgCalls):
                     return
 
                 try:
-                    await app.send_message(update.chat_id, text)
+                    sent = await app.send_message(update.chat_id, text)
+                    await asyncio.sleep(2)
+                    await sent.delete()
                 except Exception:
                     pass
 
