@@ -605,18 +605,6 @@ wheels = [
 ]
 
 [[package]]
-name = "httpx"
-version = "1.0.dev3"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "certifi" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/25/40/b6f25020eeafd822fc473394a5db45a5964a64c88788eb5dc49ffabb64e7/httpx-1.0.dev3.tar.gz", hash = "sha256:e95700e4f9cf6430295f4c195f9cb0ca0549bab4294927f8002bf196851d40db", size = 761377, upload-time = "2025-09-15T16:15:12.087Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/97/8d/ff4f018c9a813994e28fabb998f8d76542fc2b46c1210d4c1b2c615eea7f/httpx-1.0.dev3-py3-none-any.whl", hash = "sha256:80b33db1bc8e1fac2a15f419839e324d472d528822608ea6b7a93fed2011722d", size = 34319, upload-time = "2025-09-15T16:15:10.458Z" },
-]
-
-[[package]]
 name = "idna"
 version = "3.18"
 source = { registry = "https://pypi.org/simple" }
@@ -649,7 +637,7 @@ requires-dist = [
     { name = "pillow", specifier = "~=12.2.0" },
     { name = "psutil", specifier = "~=7.2.2" },
     { name = "py-tgcalls", specifier = "~=2.3.0" },
-    { name = "py-yt-search", specifier = "~=0.6.2" },
+    { name = "py-yt-search", specifier = ">=0.6.2,<0.8.0" },
     { name = "pymongo", specifier = ">=4.16.0" },
     { name = "pytgcrypto", specifier = ">=1.2.11" },
     { name = "python-dotenv", specifier = "~=1.2.1" },
@@ -1126,14 +1114,14 @@ wheels = [
 
 [[package]]
 name = "py-yt-search"
-version = "0.6.2"
+version = "0.7.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "httpx" },
+    { name = "aiohttp" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ca/fa/b40bc5f93f59a63023dac96b9db689288695380f1a44b08a5219431e7c8c/py_yt_search-0.6.2.tar.gz", hash = "sha256:2b8d8120e505ff3de4ff1d701f57a3188c75c556905b079e8df6c4861e9d878c", size = 39166, upload-time = "2026-04-11T11:53:15.895Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ee/7c/15c2212bb5924892c3accd5b5f824e4997f730d1d597944d2d84f06206e6/py_yt_search-0.7.2.tar.gz", hash = "sha256:e91bba58d89d97f2a8ad190db2cc47ab0866ccee600db02dfcde312fd1ab7360", size = 21390, upload-time = "2026-06-08T09:38:50.836Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/11/be/f552dbcf74ddfade41d3f80fc6b863f2c90d8488ef2a17b1719be9e24a06/py_yt_search-0.6.2-py3-none-any.whl", hash = "sha256:d062412d83820c296731e72aaa6efad5c714b6fbb53095cf88d75116ccf158c6", size = 46485, upload-time = "2026-04-11T11:53:14.233Z" },
+    { url = "https://files.pythonhosted.org/packages/6f/9f/99f2b3c3fcaa994fd639cbb3583ab869038024762b9680ce2075968e5aa0/py_yt_search-0.7.2-py3-none-any.whl", hash = "sha256:e0e9cd429df9c16aa21a0cfc176e56ff0093e1aa666c8f46523b5c6bbd21ada8", size = 31902, upload-time = "2026-06-08T09:38:49.473Z" },
 ]
 
 [[package]]
