@@ -8,7 +8,6 @@ import re
 import random
 import asyncio
 import aiohttp
-import httpx
 import urllib.parse
 from pathlib import Path
 from typing import Union
@@ -56,8 +55,10 @@ class YouTube:
         self._client = None
 
     async def get_client(self):
-        if self._client is None or self._client.is_closed:
-            self._client = httpx.AsyncClient(timeout=httpx.Timeout(600.0, connect=10.0))
+        if self._client is None or self._client.closed:
+            self._client = aiohttp.ClientSession(
+                timeout=aiohttp.ClientTimeout(total=600.0, connect=10.0)
+            )
         return self._client
 
     def get_cookies(self):
@@ -109,9 +110,9 @@ class YouTube:
         if API_KEY:
             params["api_key"] = API_KEY
         try:
-            response = await client.get(f"{API_URL}/search", params=params)
-            if response.status_code == 200:
-                result_data = response.json()
+            async with client.get(f"{API_URL}/search", params=params) as response:
+                if response.status == 200:
+                    result_data = await response.json()
                 result = result_data.get("result")
                 if result:
                     data = result[0]
@@ -159,9 +160,9 @@ class YouTube:
         if API_KEY:
             params["api_key"] = API_KEY
         try:
-            response = await client.get(f"{API_URL}/playlist", params=params)
-            if response.status_code == 200:
-                data = response.json()
+            async with client.get(f"{API_URL}/playlist", params=params) as response:
+                if response.status == 200:
+                    data = await response.json()
                 videos = data.get("videos")
                 if videos:
                     tracks = []
@@ -237,8 +238,8 @@ class YouTube:
             params["api_key"] = API_KEY
         try:
             # Fire and forget request to the API
-            await client.get(f"{API_URL}/download", params=params)
-            return True
+            async with client.get(f"{API_URL}/download", params=params):
+                return True
         except Exception as e:
             logger.error(f"Prefetch failed for {link}: {e}")
         return False
@@ -296,5 +297,5 @@ class YouTube:
         return await download_assistant(url, dl_type)
 
     async def close(self):
-        if self._client and not self._client.is_closed:
-            await self._client.aclose()
+        if self._client and not self._client.closed:
+            await self._client.close()
